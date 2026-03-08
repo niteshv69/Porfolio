@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Software engineer portfolio featuring projects, skills, and engineering impact."
+    />
+    <title>Nitesh | Software Engineer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="scroll-progress" id="scroll-progress"></div>
+    <div class="bg-orb orb-a" aria-hidden="true"></div>
+    <div class="bg-orb orb-b" aria-hidden="true"></div>
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <header class="topbar reveal" data-reveal>
+      <a class="brand" href="#home">Nitesh Vishwakarma</a>
+      <nav class="menu" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme">
+          <span class="theme-icon">🌙</span>
+        </button>
+      </nav>
+    </header>
+
+    <main id="home">
+      <section class="hero section reveal" data-reveal>
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <p class="eyebrow">Software Engineer Portfolio</p>
+            <h1>
+              Nitesh Vishwakarma
+              <span>Software Engineer</span>
+            </h1>
+            <p class="lead">
+              Software Engineer based in Thane, Mumbai. I build scalable web
+              applications using .NET Core, Angular, and SQL Server with a strong
+              focus on performance and reliability.
+            </p>
+            <div class="cta-row">
+              <a class="btn primary" href="#experience">View Experience</a>
+              <a class="btn ghost" href="#contact">Let's Talk</a>
+              <a class="btn resume" href="assets/Latest_Nitesh Vishwakarma_Resume_2025.pdf" download>
+                Download Resume
+              </a>
+            </div>
+            <ul class="stats" aria-label="Portfolio highlights">
+              <li>
+                <strong class="stat-number" data-target="3" data-suffix="+">0</strong>
+                <span>Years in Software</span>
+              </li>
+              <li>
+                <strong class="stat-number" data-target="4">0</strong>
+                <span>Organizations</span>
+              </li>
+              <li>
+                <strong class="stat-number" data-target="9.13" data-decimals="2">0</strong>
+                <span>M.Sc (IT) CGPI</span>
+              </li>
+            </ul>
+          </div>
+          <aside class="hero-photo-wrap" aria-label="Nitesh profile photo">
+            <img class="hero-photo" src="assets/Self.JPG" alt="Nitesh Vishwakarma" />
+          </aside>
+        </div>
+      </section>
+
+      <section id="about" class="section two-col reveal" data-reveal>
+        <div>
+          <p class="eyebrow">About Me</p>
+          <h2>Full-stack engineer delivering business-focused technology.</h2>
+          <p>
+            I specialize in end-to-end product development across frontend,
+            backend, and database layers. My work spans enterprise systems,
+            AI-enabled solutions, and high-performance APIs.
+          </p>
+          <p>
+            I collaborate closely with product, design, and data teams to ship
+            maintainable solutions that are secure, scalable, and user-friendly.
+          </p>
+        </div>
+        <aside class="glass-card">
+          <h3>Current Focus</h3>
+          <ul>
+            <li>AI and data-driven business solutions</li>
+            <li>Cloud-native deployment and DevOps</li>
+            <li>Scalable full-stack architecture</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="skills" class="section reveal" data-reveal>
+        <p class="eyebrow">Tech Stack</p>
+        <h2>Core capabilities</h2>
+        <div class="skill-grid">
+          <article class="skill-card">
+            <h3>Frontend</h3>
+            <p>Angular, TypeScript, JavaScript, HTML, CSS, Bootstrap</p>
+          </article>
+          <article class="skill-card">
+            <h3>Backend</h3>
+            <p>C#, .NET Core, Web API, REST services, integration</p>
+          </article>
+          <article class="skill-card">
+            <h3>Data and Tools</h3>
+            <p>SQL Server, Crystal Report, SVN Tortoise, Visual Studio, VS Code</p>
+          </article>
+          <article class="skill-card">
+            <h3>Cloud and DevOps</h3>
+            <p>Docker, Kubernetes, AWS, Azure, GCP, CI/CD pipelines</p>
+          </article>
+          <article class="skill-card">
+            <h3>Collaboration</h3>
+            <p>Code reviews, mentoring, cross-functional delivery, MS Office</p>
+          </article>
+          <article class="skill-card">
+            <h3>Support Engineering</h3>
+            <p>Application support, troubleshooting, uptime and monitoring</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="experience" class="section reveal" data-reveal>
+        <p class="eyebrow">Experience</p>
+        <h2>Professional journey</h2>
+        <div class="timeline">
+          <article class="timeline-card collapsed">
+            <div class="timeline-header" data-experience-toggle="exp-1">
+              <a class="company-chip" href="https://www.sia-partners.com/en" target="_blank" rel="noreferrer" title="Visit Sia Partners">SP</a>
+              <div class="timeline-title-group">
+                <h3>Sia Partners - Software Engineer</h3>
+                <p class="meta">Sep 2025 - Present | Hiranandani Powai, Mumbai</p>
+                <p class="details-hint">Click for more details →</p>
+              </div>
+              <button class="toggle-btn" aria-label="Toggle details" data-experience-toggle="exp-1">
+                <span class="toggle-icon">▼</span>
+              </button>
+            </div>
+            <div class="timeline-content" id="exp-1">
+              <ul>
+                <li>Building scalable web apps using .NET Core, C#, Angular, and JavaScript.</li>
+                <li>Contributing to Sia AI with AI-powered and data-driven business solutions.</li>
+                <li>Deploying cloud-native applications with Docker, Kubernetes, AWS, Azure, and GCP.</li>
+                <li>Managing SQL/NoSQL data operations and improving performance and reliability.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-card collapsed">
+            <div class="timeline-header" data-experience-toggle="exp-2">
+              <a class="company-chip" href="https://www.softconindia.com/" target="_blank" rel="noreferrer" title="Visit Softcon Business Solutions">SB</a>
+              <div class="timeline-title-group">
+                <h3>Softcon Business Solutions - Software Developer</h3>
+                <p class="meta">Feb 2023 - Sep 2025 | Mulund, Mumbai</p>
+                <p class="details-hint">Click for more details →</p>
+              </div>
+              <button class="toggle-btn" aria-label="Toggle details" data-experience-toggle="exp-2">
+                <span class="toggle-icon">▼</span>
+              </button>
+            </div>
+            <div class="timeline-content" id="exp-2">
+              <ul>
+                <li>Designed and built web/mobile solutions using Angular, .NET Core, and SQL Server.</li>
+                <li>Developed secure RESTful APIs and optimized database procedures and UI performance.</li>
+                <li>Led code quality efforts, reviews, and mentoring for junior developers.</li>
+                <li>Integrated Crystal Reports for client-facing professional reporting.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-card collapsed">
+            <div class="timeline-header" data-experience-toggle="exp-3">
+              <a class="company-chip" href="https://nimapinfotech.com/" target="_blank" rel="noreferrer" title="Visit Nimap Infotech">NI</a>
+              <div class="timeline-title-group">
+                <h3>Nimap Infotech - Internship</h3>
+                <p class="meta">Oct 2022 - Jan 2023 | Lower Parel, Mumbai</p>
+                <p class="details-hint">Click for more details →</p>
+              </div>
+              <button class="toggle-btn" aria-label="Toggle details" data-experience-toggle="exp-3">
+                <span class="toggle-icon">▼</span>
+              </button>
+            </div>
+            <div class="timeline-content" id="exp-3">
+              <ul>
+                <li>Developed and tested Web APIs in C# (.NET Core) with Postman.</li>
+                <li>Built UI components using Angular, HTML, and CSS.</li>
+                <li>Handled SQL Server database development and optimization tasks.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-card collapsed">
+            <div class="timeline-header" data-experience-toggle="exp-4">
+              <a class="company-chip" href="https://careers.cognizant.com/india-en/" target="_blank" rel="noreferrer" title="Visit Cognizant Careers">CG</a>
+              <div class="timeline-title-group">
+                <h3>Cognizant - Graduate Trainee Application</h3>
+                <p class="meta">Dec 2021 - Jul 2022 | Chennai</p>
+                <p class="details-hint">Click for more details →</p>
+              </div>
+              <button class="toggle-btn" aria-label="Toggle details" data-experience-toggle="exp-4">
+                <span class="toggle-icon">▼</span>
+              </button>
+            </div>
+            <div class="timeline-content" id="exp-4">
+              <ul>
+                <li>Provided application support across apps, web servers, and databases.</li>
+                <li>Resolved incidents through remote troubleshooting and proactive monitoring.</li>
+                <li>Maintained smooth operations and high system uptime.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="projects" class="section reveal" data-reveal>
+        <p class="eyebrow">Featured Work</p>
+        <h2>Selected projects</h2>
+        <div class="project-grid">
+          <article class="project-card">
+            <h3>Smart Business (Web)</h3>
+            <p>
+              Developed a B2B platform enabling seamless online business
+              transactions with secure backend workflows.
+            </p>
+            <span>Angular • .NET Core • SQL Server</span>
+          </article>
+          <article class="project-card">
+            <h3>Agent Platform (Web and Mobile)</h3>
+            <p>
+              Built a cross-platform solution with responsive UX and robust
+              backend integration for field and office workflows.
+            </p>
+            <span>Angular • APIs • Mobile-first UI</span>
+          </article>
+          <article class="project-card">
+            <h3>Smart Retailer (Web)</h3>
+            <p>
+              Created an inventory management platform with real-time stock
+              tracking and efficient reporting.
+            </p>
+            <span>Inventory • SQL • Reporting</span>
+          </article>
+        </div>
+      </section>
+
+      <section id="education" class="section reveal" data-reveal>
+        <p class="eyebrow">Education</p>
+        <h2>Academic background</h2>
+        <div class="project-grid">
+          <article class="project-card">
+            <h3>Master of Science (IT)</h3>
+            <p>
+              <a class="college-link" href="https://www.jnanvikasmandal.com/" target="_blank" rel="noreferrer">Jan Vikas Mandal's Mehta Degree College</a>, Airoli
+            </p>
+            <span>CGPI: 9.13</span>
+          </article>
+          <article class="project-card">
+            <h3>Bachelor of Science (Computer Science)</h3>
+            <p>
+              <a class="college-link" href="https://vpmrzshahcollege.edu.in/" target="_blank" rel="noreferrer">V.P.M's R. Z. Shah College</a>, Mulund (E)
+            </p>
+            <span>CGPI: 6.76</span>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact reveal" data-reveal>
+        <p class="eyebrow">Contact</p>
+        <h2>Open for software engineering opportunities.</h2>
+        <p>Get in touch via the form below or reach out directly.</p>
+        
+        <div class="contact-layout">
+          <div class="contact-form-wrapper">
+            <form class="contact-form" id="contact-form">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  name="name" 
+                  placeholder="Enter your name" 
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  placeholder="your.email@example.com" 
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea 
+                  id="message" 
+                  name="message" 
+                  placeholder="Your message here..." 
+                  rows="5" 
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn primary">Send Message</button>
+              <p class="form-status" id="form-status"></p>
+            </form>
+          </div>
+
+          <div class="contact-links-wrapper">
+            <p class="contact-links-title">Or reach out directly:</p>
+            <div class="contact-links-grid">
+              <a href="tel:+917303569994" class="contact-link-item">
+                <span class="contact-icon">📞</span>
+                <span class="contact-label">+91 7303569994</span>
+              </a>
+              <a href="mailto:niteshvishwa69@gmail.com" class="contact-link-item">
+                <span class="contact-icon">📧</span>
+                <span class="contact-label">niteshvishwa69@gmail.com</span>
+              </a>
+              <a href="https://linkedin.com/in/niteshvishwakarma" target="_blank" rel="noreferrer" class="contact-link-item">
+                <span class="contact-icon">💼</span>
+                <span class="contact-label">linkedin.com/in/niteshvishwakarma</span>
+              </a>
+              <a href="#" class="contact-link-item">
+                <span class="contact-icon">📍</span>
+                <span class="contact-label">Thane, Mumbai, Maharashtra</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer reveal" data-reveal>
+      <p>© 2026 Nitesh. Software Engineer Portfolio.</p>
+    </footer>
+
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+      <span>↑</span>
+    </button>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

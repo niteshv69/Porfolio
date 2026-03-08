@@ -1,0 +1,51 @@
+Nitesh Vishwakarma
+Thane Mumbai, Maharashtra
+Phone: +91 7303569994
+Email: niteshvishwa69@gmail.com
+LinkedIn: linkedin.com/in/niteshvishwakarma
+
+SKILLS
+C# | .Net Core | Web API | Angular | SQL Server | TypeScript | JavaScript | HTML | CSS |
+Bootstrap | SVN Tortoise | Crystal Report | Visual Studio | VS Code | MS Office
+
+EXPERIENCE
+
+Sia Partners - Software Engineer (Sep 2025 - Present)
+Location: Hiranandani Powai, Mumbai
+- Full-Stack Development: Building web applications using .NET Core, C#, Angular, and JavaScript, focusing on scalable and maintainable solutions.
+- AI and Data Solutions: Contributing to Sia AI, delivering AI-powered and data-driven solutions for business optimization.
+- Cloud-Native Development: Deploying applications using Docker and Kubernetes and integrating with AWS, Azure, and GCP.
+- Database Management: Working with SQL/NoSQL databases for high-performance data operations.
+- CI/CD and Performance: Implementing CI/CD pipelines, optimizing performance, and ensuring reliability of deployed applications.
+- Collaboration: Working alongside Data Scientists, AI Engineers, and UX/UI Designers to deliver innovative solutions.
+
+Softcon Business Solutions - Software Developer (Feb 2023 - Sep 2025)
+Location: Mulund, Mumbai
+- Full-Stack Development: Designed and built dynamic web and mobile applications using Angular, .NET Core, and SQL Server.
+- Frontend Development: Created responsive, interactive UI components with Angular and TypeScript to enhance user experience.
+- Backend Development: Developed secure, scalable RESTful APIs for business transactions using C# and .NET Core.
+- Database Management: Wrote and optimized complex SQL stored procedures for high-performance data operations.
+- Performance Optimization: Improved API response times, database queries, and UI performance.
+- Code Quality: Conducted code reviews, ensured coding standards, and mentored junior developers.
+- Reporting: Integrated Crystal Reports for professional, client-side reporting solutions.
+Projects: Smart Business (Web), Smart Retailer (Web), Agent (Web and Mobile App)
+- Smart Business (Web): Built a B2B platform enabling seamless online business transactions.
+- Agent Platform (Web and Mobile): Created a cross-platform application with backend integration and responsive design.
+- Smart Retailer (Web): Developed an inventory management system with real-time stock tracking.
+
+Nimap Infotech - Internship (Oct 2022 - Jan 2023)
+Location: Lower Parel, Mumbai
+- Developed Web APIs using C# (.NET Core) and tested them with Postman.
+- Worked on UI development using Angular, HTML, and CSS.
+- Handled database development and optimization tasks using SQL Server.
+- Gained experience in integrating frontend and backend components seamlessly.
+
+Cognizant - Graduate Trainee Application (Dec 2021 - Jul 2022)
+Location: Chennai
+- Worked as an Application Support Engineer, resolving technical issues across applications, web servers, and databases.
+- Utilized remote troubleshooting tools to quickly identify and fix problems.
+- Ensured high system uptime by monitoring and maintaining smooth operations.
+
+EDUCATION
+- Master of Science (IT) - Jan Vikas Mandal's Mehta Degree College, Airoli | CGPI: 9.13
+- Bachelor of Science (Computer Science) - V.P.M's R. Z. Shah College, Mulund (E) | CGPI: 6.76
