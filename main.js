@@ -218,6 +218,61 @@ experienceToggles.forEach(toggle => {
   });
 });
 
+// Visitor tracking — fires once per browser session
+(async function trackVisitor() {
+  if (sessionStorage.getItem('_vt')) return;
+  sessionStorage.setItem('_vt', '1');
+
+  try {
+    const ua = navigator.userAgent;
+
+    // Detect browser
+    let browser = 'Unknown';
+    if (ua.includes('Edg/'))                                  browser = 'Microsoft Edge';
+    else if (ua.includes('OPR/') || ua.includes('Opera'))     browser = 'Opera';
+    else if (ua.includes('Chrome/'))                          browser = 'Google Chrome';
+    else if (ua.includes('Firefox/'))                         browser = 'Mozilla Firefox';
+    else if (ua.includes('Safari/') && !ua.includes('Chrome')) browser = 'Apple Safari';
+    else if (ua.includes('MSIE') || ua.includes('Trident/')) browser = 'Internet Explorer';
+
+    // Detect OS
+    let os = 'Unknown OS';
+    if (/iPhone|iPad|iPod/.test(ua))   os = 'iOS';
+    else if (/Android/.test(ua))        os = 'Android';
+    else if (/Windows NT/.test(ua))     os = 'Windows';
+    else if (/Macintosh/.test(ua))      os = 'macOS';
+    else if (/Linux/.test(ua))          os = 'Linux';
+
+    // Detect device type
+    const device = /Mobi|Android|iPhone|iPad|iPod/.test(ua) ? 'Mobile / Tablet' : 'Desktop';
+
+    // Fetch IP + geo info
+    const res = await fetch('https://ipapi.co/json/');
+    const d = await res.json();
+
+    // Send email via FormSubmit (first visit triggers a one-time activation email to you)
+    const form = new FormData();
+    form.append('_subject',          '🔔 New Portfolio Visitor');
+    form.append('_captcha',          'false');
+    form.append('IP Address',        d.ip            || 'N/A');
+    form.append('City / Region',     `${d.city || ''}, ${d.region || ''}`);
+    form.append('Country',           d.country_name  || 'N/A');
+    form.append('ISP / Network',     d.org           || 'N/A');
+    form.append('Browser',           browser);
+    form.append('Operating System',  os);
+    form.append('Device Type',       device);
+    form.append('Screen Resolution', `${screen.width}x${screen.height}`);
+    form.append('Visited At',        new Date().toLocaleString());
+
+    await fetch('https://formsubmit.co/ajax/niteshvishwa69@gmail.com', {
+      method: 'POST',
+      body: form
+    });
+  } catch {
+    // Silently ignore — never disrupt the visitor experience
+  }
+})();
+
 // Contact form handler
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
