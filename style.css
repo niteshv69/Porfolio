@@ -555,6 +555,102 @@ h1 span {
   line-height: 1.7;
 }
 
+/* ── Tech icon skills layout ── */
+.tech-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.tech-category-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.tech-category {
+  background: var(--card);
+  border: 1px solid rgba(154, 194, 255, 0.18);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.6rem 1.6rem;
+}
+
+.tech-cat-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 1.2rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.tech-icon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem 1.4rem;
+  align-items: flex-start;
+}
+
+.tech-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  width: 68px;
+}
+
+.tech-icon-circle {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(10, 28, 60, 0.8);
+  border: 1px solid rgba(154, 194, 255, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+}
+
+.tech-icon-circle--light {
+  background: rgba(30, 30, 50, 0.9);
+}
+
+.tech-icon-circle img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.tech-icon-item:hover .tech-icon-circle {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 212, 255, 0.2);
+}
+
+.tech-icon-item span {
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.3;
+}
+
+[data-theme="light"] .tech-icon-circle {
+  background: rgba(240, 245, 255, 0.9);
+  border-color: rgba(80, 120, 200, 0.25);
+}
+
+[data-theme="light"] .tech-icon-circle--light {
+  background: rgba(30, 30, 50, 0.08);
+}
+
+[data-theme="light"] .tech-icon-circle img {
+  filter: none;
+}
+/* ────────────────────────────── */
+
 .project-card span {
   font-size: 0.85rem;
   color: #b7cfff;
@@ -1106,6 +1202,10 @@ h1 span {
   .timeline {
     grid-template-columns: 1fr 1fr;
   }
+
+  .tech-category-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 720px) {
@@ -1157,7 +1257,24 @@ h1 span {
     grid-template-columns: 1fr;
   }
 
-  .timeline {
+  .tech-category-row {
+    grid-template-columns: 1fr;
+  }
+
+  .tech-icon-item {
+    width: 58px;
+  }
+
+  .tech-icon-circle {
+    width: 50px;
+    height: 50px;
+  }
+
+  .tech-icon-circle img {
+    width: 26px;
+    height: 26px;
+  }
+
     padding-left: 0.75rem;
   }
 
