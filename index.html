@@ -14,6 +14,25 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Welcome popup -->
+    <div class="welcome-overlay" id="welcome-overlay" aria-hidden="true">
+      <div class="welcome-card" id="welcome-card">
+        <div class="welcome-avatar">
+          <img src="assets/Self.JPG" alt="Nitesh" />
+          <span class="welcome-status"></span>
+        </div>
+        <div class="welcome-text">
+          <p class="welcome-hey">Hey there! <span class="wave">👋</span></p>
+          <h2 class="welcome-name">I'm <span>Nitesh</span></h2>
+          <p class="welcome-role">Software Engineer · .NET · Angular</p>
+        </div>
+        <button class="welcome-close" id="welcome-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="welcome-bar"></div>
+      </div>
+    </div>
+
     <div class="scroll-progress" id="scroll-progress"></div>
     <div class="bg-orb orb-a" aria-hidden="true"></div>
     <div class="bg-orb orb-b" aria-hidden="true"></div>

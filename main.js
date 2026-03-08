@@ -1,3 +1,22 @@
+// Welcome popup
+(function () {
+  const overlay = document.getElementById('welcome-overlay');
+  const closeBtn = document.getElementById('welcome-close');
+
+  function dismiss() {
+    overlay.classList.add('hide');
+    overlay.addEventListener('animationend', () => overlay.remove(), { once: true });
+  }
+
+  // Auto-dismiss after 6.2s (matches 0.8s delay + 5s bar + small buffer)
+  const autoTimer = setTimeout(dismiss, 6200);
+
+  closeBtn?.addEventListener('click', () => {
+    clearTimeout(autoTimer);
+    dismiss();
+  });
+})();
+
 // Theme toggle
 const htmlElement = document.documentElement;
 const themeToggle = document.getElementById('theme-toggle');
