@@ -218,7 +218,37 @@ experienceToggles.forEach(toggle => {
   });
 });
 
-// Visitor tracking — fires once per browser session
+// ── VISITOR ADMIN DASHBOARD ──────────────────────────────────────────────────
+// SETUP (one-time, free):
+//  1. Go to https://console.firebase.google.com → Create a project
+//  2. Build → Realtime Database → Create database → Start in test mode
+//  3. Copy your database URL (looks like: https://xxx-default-rtdb.firebaseio.com)
+//  4. Paste it below replacing YOUR_PROJECT_ID-default-rtdb
+//  5. Change ADMIN_PASS to your own secret password
+const FB_DB_URL = 'https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com';
+const ADMIN_PASS = 'nitesh@admin2026'; // ← Change this!
+
+const _fbReady = !FB_DB_URL.includes('YOUR_PROJECT_ID');
+
+async function saveVisitorToDB(data) {
+  if (!_fbReady) return;
+  try {
+    await fetch(`${FB_DB_URL}/visitors.json`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  } catch { /* silent */ }
+}
+
+async function fetchAllVisitors() {
+  const res = await fetch(`${FB_DB_URL}/visitors.json`);
+  const data = await res.json();
+  if (!data || typeof data !== 'object') return [];
+  return Object.values(data).reverse(); // newest first
+}
+
+// ── Visitor tracking — fires once per browser session ────────────────────────
 (async function trackVisitor() {
   if (sessionStorage.getItem('_vt')) return;
   sessionStorage.setItem('_vt', '1');
@@ -226,52 +256,228 @@ experienceToggles.forEach(toggle => {
   try {
     const ua = navigator.userAgent;
 
-    // Detect browser
     let browser = 'Unknown';
-    if (ua.includes('Edg/'))                                  browser = 'Microsoft Edge';
-    else if (ua.includes('OPR/') || ua.includes('Opera'))     browser = 'Opera';
-    else if (ua.includes('Chrome/'))                          browser = 'Google Chrome';
-    else if (ua.includes('Firefox/'))                         browser = 'Mozilla Firefox';
+    if (ua.includes('Edg/'))                                   browser = 'Microsoft Edge';
+    else if (ua.includes('OPR/') || ua.includes('Opera'))      browser = 'Opera';
+    else if (ua.includes('Chrome/'))                           browser = 'Google Chrome';
+    else if (ua.includes('Firefox/'))                          browser = 'Mozilla Firefox';
     else if (ua.includes('Safari/') && !ua.includes('Chrome')) browser = 'Apple Safari';
-    else if (ua.includes('MSIE') || ua.includes('Trident/')) browser = 'Internet Explorer';
+    else if (ua.includes('MSIE') || ua.includes('Trident/'))   browser = 'Internet Explorer';
 
-    // Detect OS
     let os = 'Unknown OS';
-    if (/iPhone|iPad|iPod/.test(ua))   os = 'iOS';
-    else if (/Android/.test(ua))        os = 'Android';
-    else if (/Windows NT/.test(ua))     os = 'Windows';
-    else if (/Macintosh/.test(ua))      os = 'macOS';
-    else if (/Linux/.test(ua))          os = 'Linux';
+    if (/iPhone|iPad|iPod/.test(ua))  os = 'iOS';
+    else if (/Android/.test(ua))       os = 'Android';
+    else if (/Windows NT/.test(ua))    os = 'Windows';
+    else if (/Macintosh/.test(ua))     os = 'macOS';
+    else if (/Linux/.test(ua))         os = 'Linux';
 
-    // Detect device type
     const device = /Mobi|Android|iPhone|iPad|iPod/.test(ua) ? 'Mobile / Tablet' : 'Desktop';
 
-    // Fetch IP + geo info
     const res = await fetch('https://ipapi.co/json/');
     const d = await res.json();
 
-    // Send email via FormSubmit (first visit triggers a one-time activation email to you)
-    const form = new FormData();
-    form.append('_subject',          '🔔 New Portfolio Visitor');
-    form.append('_captcha',          'false');
-    form.append('IP Address',        d.ip            || 'N/A');
-    form.append('City / Region',     `${d.city || ''}, ${d.region || ''}`);
-    form.append('Country',           d.country_name  || 'N/A');
-    form.append('ISP / Network',     d.org           || 'N/A');
-    form.append('Browser',           browser);
-    form.append('Operating System',  os);
-    form.append('Device Type',       device);
-    form.append('Screen Resolution', `${screen.width}x${screen.height}`);
-    form.append('Visited At',        new Date().toLocaleString());
+    const visitorData = {
+      'IP Address':        d.ip            || 'N/A',
+      'City / Region':     `${d.city || ''}, ${d.region || ''}`.replace(/^,\s*/, ''),
+      'Country':           d.country_name  || 'N/A',
+      'ISP / Network':     d.org           || 'N/A',
+      'Browser':           browser,
+      'Operating System':  os,
+      'Device Type':       device,
+      'Screen Resolution': `${screen.width}x${screen.height}`,
+      'Visited At':        new Date().toLocaleString()
+    };
 
+    // Save to Firebase Realtime Database
+    await saveVisitorToDB(visitorData);
+
+    // Also send email notification via FormSubmit
+    const form = new FormData();
+    form.append('_subject', '🔔 New Portfolio Visitor');
+    form.append('_captcha', 'false');
+    for (const [k, v] of Object.entries(visitorData)) form.append(k, v);
     await fetch('https://formsubmit.co/ajax/niteshvishwa69@gmail.com', {
       method: 'POST',
       body: form
     });
-  } catch {
-    // Silently ignore — never disrupt the visitor experience
-  }
+  } catch { /* silent */ }
 })();
+
+// ── Admin Panel ───────────────────────────────────────────────────────────────
+const adminOverlay    = document.getElementById('admin-overlay');
+const adminDashboard  = document.getElementById('admin-dashboard-overlay');
+const adminPassForm   = document.getElementById('admin-pass-form');
+const adminPassInput  = document.getElementById('admin-pass-input');
+const adminPassError  = document.getElementById('admin-pass-error');
+const adminPassClose  = document.getElementById('admin-pass-close');
+const adminDashClose  = document.getElementById('admin-dash-close');
+const adminExportBtn  = document.getElementById('admin-export-btn');
+
+function openAdminLogin() {
+  if (!adminOverlay) return;
+  adminPassInput.value = '';
+  adminPassError.textContent = '';
+  adminOverlay.setAttribute('aria-hidden', 'false');
+  adminOverlay.classList.add('open');
+  setTimeout(() => adminPassInput.focus(), 80);
+}
+
+function closeAdminLogin() {
+  adminOverlay?.classList.remove('open');
+  adminOverlay?.setAttribute('aria-hidden', 'true');
+}
+
+function openDashboard() {
+  if (!adminDashboard) return;
+  adminDashboard.setAttribute('aria-hidden', 'false');
+  adminDashboard.classList.add('open');
+  loadVisitorData();
+}
+
+function closeDashboard() {
+  adminDashboard?.classList.remove('open');
+  adminDashboard?.setAttribute('aria-hidden', 'true');
+}
+
+// Keyboard shortcut: Ctrl+Shift+V
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.shiftKey && e.key === 'V') {
+    e.preventDefault();
+    openAdminLogin();
+  }
+});
+
+// Triple-click on footer
+let footerClickCount = 0;
+let footerClickTimer = null;
+document.querySelector('.footer')?.addEventListener('click', () => {
+  footerClickCount++;
+  clearTimeout(footerClickTimer);
+  footerClickTimer = setTimeout(() => { footerClickCount = 0; }, 600);
+  if (footerClickCount >= 3) {
+    footerClickCount = 0;
+    openAdminLogin();
+  }
+});
+
+adminPassClose?.addEventListener('click', closeAdminLogin);
+adminDashClose?.addEventListener('click', closeDashboard);
+
+// Close on overlay backdrop click
+adminOverlay?.addEventListener('click', (e) => { if (e.target === adminOverlay) closeAdminLogin(); });
+adminDashboard?.addEventListener('click', (e) => { if (e.target === adminDashboard) closeDashboard(); });
+
+// Password check
+adminPassForm?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (adminPassInput.value === ADMIN_PASS) {
+    closeAdminLogin();
+    openDashboard();
+  } else {
+    adminPassError.textContent = 'Incorrect password. Try again.';
+    adminPassInput.value = '';
+    adminPassInput.focus();
+  }
+});
+
+// Load & render visitor data
+async function loadVisitorData() {
+  const loading  = document.getElementById('admin-loading');
+  const table    = document.getElementById('admin-table');
+  const tbody    = document.getElementById('admin-table-body');
+  const empty    = document.getElementById('admin-empty');
+
+  if (!_fbReady) {
+    loading.hidden = true;
+    empty.hidden = false;
+    empty.textContent = 'Firebase not configured yet. See code comments in main.js to set it up.';
+    return;
+  }
+
+  try {
+    const visitors = await fetchAllVisitors();
+
+    loading.hidden = true;
+
+    if (visitors.length === 0) {
+      empty.hidden = false;
+      return;
+    }
+
+    // Stats
+    const countries  = new Set(visitors.map(v => v['Country'])).size;
+    const mobileCount = visitors.filter(v => v['Device Type']?.includes('Mobile')).length;
+    const mobilePct  = Math.round((mobileCount / visitors.length) * 100);
+    const browserMap = {};
+    visitors.forEach(v => { const b = v['Browser'] || 'Unknown'; browserMap[b] = (browserMap[b] || 0) + 1; });
+    const topBrowser = Object.entries(browserMap).sort((a, b) => b[1] - a[1])[0]?.[0] || '—';
+
+    document.getElementById('stat-total').textContent       = visitors.length;
+    document.getElementById('stat-countries').textContent   = countries;
+    document.getElementById('stat-mobile').textContent      = mobilePct + '%';
+    document.getElementById('stat-top-browser').textContent = topBrowser;
+
+    // Table rows
+    tbody.innerHTML = '';
+    visitors.forEach((v, i) => {
+      const isMobile = v['Device Type']?.includes('Mobile');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${visitors.length - i}</td>
+        <td>${escHtml(v['IP Address'] || '—')}</td>
+        <td>${escHtml(v['City / Region'] || '—')}</td>
+        <td>${escHtml(v['Country'] || '—')}</td>
+        <td>${escHtml(v['ISP / Network'] || '—')}</td>
+        <td><span class="admin-badge">${escHtml(v['Browser'] || '—')}</span></td>
+        <td>${escHtml(v['Operating System'] || '—')}</td>
+        <td><span class="admin-badge${isMobile ? ' mobile' : ''}">${escHtml(v['Device Type'] || '—')}</span></td>
+        <td>${escHtml(v['Screen Resolution'] || '—')}</td>
+        <td>${escHtml(v['Visited At'] || '—')}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    table.hidden = false;
+
+    // Store for CSV export
+    adminDashboard._visitors = visitors;
+  } catch (err) {
+    loading.textContent = 'Failed to load visitor data. Check Firebase configuration.';
+  }
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// CSV export
+adminExportBtn?.addEventListener('click', () => {
+  const visitors = adminDashboard._visitors;
+  if (!visitors?.length) return;
+
+  const headers = ['#','IP Address','City / Region','Country','ISP / Network','Browser','Operating System','Device Type','Screen Resolution','Visited At'];
+  const rows = visitors.map((v, i) => [
+    visitors.length - i,
+    v['IP Address'] || '',
+    v['City / Region'] || '',
+    v['Country'] || '',
+    v['ISP / Network'] || '',
+    v['Browser'] || '',
+    v['Operating System'] || '',
+    v['Device Type'] || '',
+    v['Screen Resolution'] || '',
+    v['Visited At'] || ''
+  ].map(c => `"${String(c).replace(/"/g,'""')}"`).join(','));
+
+  const csv = [headers.join(','), ...rows].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `visitors_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+});
 
 // Contact form handler
 const contactForm = document.getElementById('contact-form');

@@ -500,11 +500,79 @@
 
     <footer class="footer reveal" data-reveal>
       <p>© 2026 Nitesh. Software Engineer Portfolio.</p>
+      <p class="footer-admin-hint" title="Admin">Press Ctrl+Shift+V for admin</p>
     </footer>
 
     <button class="back-to-top" id="back-to-top" aria-label="Back to top">
       <span>↑</span>
     </button>
+
+    <!-- Admin: Password Modal -->
+    <div class="admin-overlay" id="admin-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Admin login">
+      <div class="admin-card">
+        <button class="admin-close-btn" id="admin-pass-close" aria-label="Close">✕</button>
+        <div class="admin-lock-icon">🔒</div>
+        <h2 class="admin-title">Admin Access</h2>
+        <p class="admin-subtitle">Enter password to view visitor analytics</p>
+        <form id="admin-pass-form" autocomplete="off">
+          <input
+            class="admin-pass-input"
+            id="admin-pass-input"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+            required
+          />
+          <p class="admin-pass-error" id="admin-pass-error"></p>
+          <button class="btn primary admin-submit-btn" type="submit">Unlock Dashboard</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Admin: Visitor Dashboard Modal -->
+    <div class="admin-overlay" id="admin-dashboard-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Visitor dashboard">
+      <div class="admin-dashboard-card">
+        <div class="admin-dash-header">
+          <div>
+            <h2 class="admin-title" style="margin:0">Visitor Dashboard</h2>
+            <p class="admin-subtitle" style="margin:0.25rem 0 0">Real-time visitor analytics</p>
+          </div>
+          <div class="admin-dash-actions">
+            <button class="btn ghost admin-export-btn" id="admin-export-btn">⬇ Export CSV</button>
+            <button class="admin-close-btn" id="admin-dash-close" aria-label="Close dashboard">✕</button>
+          </div>
+        </div>
+
+        <div class="admin-stats-row" id="admin-stats-row">
+          <div class="admin-stat-box"><span class="admin-stat-num" id="stat-total">—</span><span>Total Visits</span></div>
+          <div class="admin-stat-box"><span class="admin-stat-num" id="stat-countries">—</span><span>Countries</span></div>
+          <div class="admin-stat-box"><span class="admin-stat-num" id="stat-mobile">—</span><span>Mobile %</span></div>
+          <div class="admin-stat-box"><span class="admin-stat-num" id="stat-top-browser">—</span><span>Top Browser</span></div>
+        </div>
+
+        <div class="admin-table-wrap" id="admin-table-wrap">
+          <p class="admin-loading" id="admin-loading">Loading visitors…</p>
+          <table class="admin-table" id="admin-table" hidden>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>IP Address</th>
+                <th>Location</th>
+                <th>Country</th>
+                <th>ISP</th>
+                <th>Browser</th>
+                <th>OS</th>
+                <th>Device</th>
+                <th>Screen</th>
+                <th>Visited At</th>
+              </tr>
+            </thead>
+            <tbody id="admin-table-body"></tbody>
+          </table>
+          <p class="admin-empty" id="admin-empty" hidden>No visitors recorded yet. Make sure Firebase is configured.</p>
+        </div>
+      </div>
+    </div>
 
     <script type="module" src="main.js"></script>
   </body>
