@@ -598,36 +598,81 @@ h1 span {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.45rem;
-  width: 68px;
+  gap: 0.55rem;
+  width: 76px;
+  cursor: default;
 }
 
 .tech-icon-circle {
-  width: 58px;
-  height: 58px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  background: rgba(10, 28, 60, 0.8);
-  border: 1px solid rgba(154, 194, 255, 0.22);
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+  /* 3D sphere base — dark navy with radial light from top-left */
+  background: radial-gradient(circle at 35% 30%, #1e3c72 0%, #0d2246 45%, #040e22 100%);
+  border: 1px solid rgba(0, 212, 255, 0.28);
+  /* Outer drop shadow + bottom depth shadow + inner highlight rim */
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.65),
+    0 3px 8px rgba(0, 0, 0, 0.45),
+    inset 0 2px 3px rgba(255, 255, 255, 0.18),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.45);
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 300ms ease,
+              border-color 300ms ease;
+}
+
+/* Top glare highlight — simulates 3D sphere lighting */
+.tech-icon-circle::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 11px;
+  width: 38%;
+  height: 22%;
+  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.28) 0%, transparent 80%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Bottom reflection rim */
+.tech-icon-circle::after {
+  content: '';
+  position: absolute;
+  bottom: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 55%;
+  height: 10%;
+  background: radial-gradient(ellipse, rgba(0, 212, 255, 0.18) 0%, transparent 80%);
+  border-radius: 50%;
+  pointer-events: none;
 }
 
 .tech-icon-circle--light {
-  background: rgba(30, 30, 50, 0.9);
+  background: radial-gradient(circle at 35% 30%, #2a2a4a 0%, #161630 45%, #0a0a1e 100%);
 }
 
 .tech-icon-circle img {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   object-fit: contain;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
 
 .tech-icon-item:hover .tech-icon-circle {
-  border-color: var(--accent);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 212, 255, 0.2);
+  transform: translateY(-6px) scale(1.1);
+  border-color: rgba(0, 212, 255, 0.7);
+  box-shadow:
+    0 18px 40px rgba(0, 212, 255, 0.3),
+    0 6px 14px rgba(0, 0, 0, 0.5),
+    inset 0 2px 3px rgba(255, 255, 255, 0.22),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .tech-icon-item span {
@@ -638,16 +683,37 @@ h1 span {
 }
 
 [data-theme="light"] .tech-icon-circle {
-  background: rgba(240, 245, 255, 0.9);
-  border-color: rgba(80, 120, 200, 0.25);
+  background: radial-gradient(circle at 35% 30%, #dce8ff 0%, #b8ccf5 45%, #8aaae0 100%);
+  border-color: rgba(61, 90, 158, 0.3);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.2),
+    0 3px 8px rgba(0, 0, 0, 0.15),
+    inset 0 2px 3px rgba(255, 255, 255, 0.55),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .tech-icon-circle::before {
+  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.55) 0%, transparent 80%);
+}
+
+[data-theme="light"] .tech-icon-circle::after {
+  background: radial-gradient(ellipse, rgba(61, 90, 158, 0.2) 0%, transparent 80%);
 }
 
 [data-theme="light"] .tech-icon-circle--light {
-  background: rgba(30, 30, 50, 0.08);
+  background: radial-gradient(circle at 35% 30%, #c8d5f5 0%, #9ab0e0 45%, #7090c8 100%);
+}
+
+[data-theme="light"] .tech-icon-item:hover .tech-icon-circle {
+  box-shadow:
+    0 18px 40px rgba(61, 90, 158, 0.3),
+    0 6px 14px rgba(0, 0, 0, 0.18),
+    inset 0 2px 3px rgba(255, 255, 255, 0.6),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
 [data-theme="light"] .tech-icon-circle img {
-  filter: none;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
 }
 /* ────────────────────────────── */
 
@@ -1262,17 +1328,17 @@ h1 span {
   }
 
   .tech-icon-item {
-    width: 58px;
+    width: 62px;
   }
 
   .tech-icon-circle {
-    width: 50px;
-    height: 50px;
+    width: 54px;
+    height: 54px;
   }
 
   .tech-icon-circle img {
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
   }
 
     padding-left: 0.75rem;
